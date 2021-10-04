@@ -2,7 +2,8 @@ import React from "react";
 import {GoogleMap, GroundOverlay, Marker, useLoadScript,} from "@react-google-maps/api";
 import usePlacesAutocomplete, {getGeocode, getLatLng,} from "use-places-autocomplete";
 import {Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover,} from "@reach/combobox";
-
+import img1 from './images/000000001.jpg'
+import img2 from './images/000000002.jpg'
 import "@reach/combobox/styles.css";
 import mapStyles from "./mapStyles";
 
@@ -15,7 +16,7 @@ const options = {
   styles: mapStyles,
   disableDefaultUI: false,
   zoomControl: true,
-  mapTypeId: "satellite"
+  // mapTypeId: "satellite"
 };
 const center = {
   lat: 38.9947278,
@@ -74,10 +75,23 @@ export default function App() {
 
       <GroundOverlay
       // url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
-      url="images/newark_nj_1922.jpg"
+      // url="https://github.com/360wcui/google-maps-react-2020/blob/master/src/images/newark_nj_1922.jpg"
+      url={img1}
       bounds={new window.google.maps.LatLngBounds(
-        new window.google.maps.LatLng(38.9647278, -76.9491321),
-        new window.google.maps.LatLng(38.9747278, -76.9391321)
+        new window.google.maps.LatLng(38.9847278, -76.9491321),
+        new window.google.maps.LatLng(38.9841278, -76.9485321)
+      )}
+      onClick={onMapClick}
+      // defaultOpacity={.5}
+    />
+
+    <GroundOverlay
+      // url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+      // url="https://github.com/360wcui/google-maps-react-2020/blob/master/src/images/newark_nj_1922.jpg"
+      url={img2}
+      bounds={new window.google.maps.LatLngBounds(
+        new window.google.maps.LatLng(38.9841278, -76.9491321),
+        new window.google.maps.LatLng(38.9835278, -76.9485321)
       )}
       onClick={onMapClick}
       // defaultOpacity={.5}
