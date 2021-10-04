@@ -28,12 +28,13 @@ const mapContainerStyle = {
 };
 const options = {
   styles: mapStyles,
-  disableDefaultUI: true,
+  disableDefaultUI: false,
   zoomControl: true,
+  mapTypeId: "satellite"
 };
 const center = {
-  lat: 43.6532,
-  lng: -79.3832,
+  lat: 38.9947278,
+  lng: -76.9491321,
 };
 
 export default function App() {
@@ -45,6 +46,7 @@ export default function App() {
   const [selected, setSelected] = React.useState(null);
 
   const onMapClick = React.useCallback((e) => {
+    console.log(e.latLng.lat(), e.latLng.lng());
     setMarkers((current) => [
       ...current,
       {
@@ -62,7 +64,7 @@ export default function App() {
 
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    mapRef.current.setZoom(20);
   }, []);
 
   if (loadError) return "Error";
@@ -70,20 +72,13 @@ export default function App() {
 
   return (
     <div>
-      <h1>
-        Bears{" "}
-        <span role="img" aria-label="tent">
-          ⛺️
-        </span>
-      </h1>
 
-      <Locate panTo={panTo} />
       <Search panTo={panTo} />
 
       <GoogleMap
         id="map"
         mapContainerStyle={mapContainerStyle}
-        zoom={8}
+        zoom={20}
         center={center}
         options={options}
         onClick={onMapClick}
@@ -97,7 +92,7 @@ export default function App() {
               setSelected(marker);
             }}
             icon={{
-              url: `/bear.svg`,
+              url: `/logo192.png`,
               origin: new window.google.maps.Point(0, 0),
               anchor: new window.google.maps.Point(15, 15),
               scaledSize: new window.google.maps.Size(30, 30),
@@ -114,8 +109,8 @@ export default function App() {
           >
             <div>
               <h2>
-                <span role="img" aria-label="bear">
-                  🐻
+                <span role="img" aria-label="star">
+                  X
                 </span>{" "}
                 Alert
               </h2>
@@ -125,27 +120,6 @@ export default function App() {
         ) : null}
       </GoogleMap>
     </div>
-  );
-}
-
-function Locate({ panTo }) {
-  return (
-    <button
-      className="locate"
-      onClick={() => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            panTo({
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            });
-          },
-          () => null
-        );
-      }}
-    >
-      <img src="/compass.svg" alt="compass" />
-    </button>
   );
 }
 
