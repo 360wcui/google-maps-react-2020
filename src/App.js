@@ -1,22 +1,7 @@
 import React from "react";
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-import { formatRelative } from "date-fns";
+import {GoogleMap, GroundOverlay, Marker, useLoadScript,} from "@react-google-maps/api";
+import usePlacesAutocomplete, {getGeocode, getLatLng,} from "use-places-autocomplete";
+import {Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover,} from "@reach/combobox";
 
 import "@reach/combobox/styles.css";
 import mapStyles from "./mapStyles";
@@ -84,6 +69,18 @@ export default function App() {
         onClick={onMapClick}
         onLoad={onMapLoad}
       >
+        {/*lat: 38.9947278,*/}
+  {/*lng: -76.9491321,*/}
+
+      <GroundOverlay
+      url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+      bounds={new window.google.maps.LatLngBounds(
+        new window.google.maps.LatLng(38.9647278, -76.9491321),
+        new window.google.maps.LatLng(38.9747278, -76.9391321)
+      )}
+      onClick={onMapClick}
+      // defaultOpacity={.5}
+    />
         {markers.map((marker) => (
           <Marker
             key={`${marker.lat}-${marker.lng}`}
@@ -100,24 +97,24 @@ export default function App() {
           />
         ))}
 
-        {selected ? (
-          <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div>
-              <h2>
-                <span role="img" aria-label="star">
-                  X
-                </span>{" "}
-                Alert
-              </h2>
-              <p>Spotted {formatRelative(selected.time, new Date())}</p>
-            </div>
-          </InfoWindow>
-        ) : null}
+        {/*{selected ? (*/}
+        {/*  <InfoWindow*/}
+        {/*    position={{ lat: selected.lat, lng: selected.lng }}*/}
+        {/*    onCloseClick={() => {*/}
+        {/*      setSelected(null);*/}
+        {/*    }}*/}
+        {/*  >*/}
+        {/*    <div>*/}
+        {/*      <h2>*/}
+        {/*        <span role="img" aria-label="star">*/}
+        {/*          X*/}
+        {/*        </span>{" "}*/}
+        {/*        Alert*/}
+        {/*      </h2>*/}
+        {/*      <p>Spotted {formatRelative(selected.time, new Date())}</p>*/}
+        {/*    </div>*/}
+        {/*  </InfoWindow>*/}
+        {/*) : null}*/}
       </GoogleMap>
     </div>
   );
