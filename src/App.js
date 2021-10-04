@@ -73,7 +73,8 @@ export default function App() {
   {/*lng: -76.9491321,*/}
 
       <GroundOverlay
-      url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+      // url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+      url="images/newark_nj_1922.jpg"
       bounds={new window.google.maps.LatLngBounds(
         new window.google.maps.LatLng(38.9647278, -76.9491321),
         new window.google.maps.LatLng(38.9747278, -76.9391321)
@@ -97,24 +98,6 @@ export default function App() {
           />
         ))}
 
-        {/*{selected ? (*/}
-        {/*  <InfoWindow*/}
-        {/*    position={{ lat: selected.lat, lng: selected.lng }}*/}
-        {/*    onCloseClick={() => {*/}
-        {/*      setSelected(null);*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    <div>*/}
-        {/*      <h2>*/}
-        {/*        <span role="img" aria-label="star">*/}
-        {/*          X*/}
-        {/*        </span>{" "}*/}
-        {/*        Alert*/}
-        {/*      </h2>*/}
-        {/*      <p>Spotted {formatRelative(selected.time, new Date())}</p>*/}
-        {/*    </div>*/}
-        {/*  </InfoWindow>*/}
-        {/*) : null}*/}
       </GoogleMap>
     </div>
   );
