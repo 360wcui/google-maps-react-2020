@@ -4,7 +4,15 @@ import img1 from './images/000000001.jpg'
 import img2 from './images/000000002.jpg'
 import "@reach/combobox/styles.css";
 import Search from "./Search";
-import {center, mapContainerStyle, options, libraries} from "./variables";
+import {
+    center,
+    mapContainerStyle,
+    options,
+    libraries,
+    drone_image_base_lat,
+    drone_image_increment,
+    drone_image_base_lng
+} from "./variables";
 
 
 export default function App() {
@@ -39,7 +47,15 @@ export default function App() {
 
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
+    const img1_sw_lat = drone_image_base_lat - drone_image_increment * 1.097 / 2;
+    const img1_sw_lng = drone_image_base_lng - drone_image_increment * 1.422  / 2;
+    const img1_ne_lat = drone_image_base_lat + drone_image_increment * 1.097 / 2;
+    const img1_ne_lng = drone_image_base_lng + drone_image_increment * 1.422 / 2;
 
+    const img2_sw_lat = drone_image_base_lat - drone_image_increment - drone_image_increment * 1.097 / 2;
+    const img2_sw_lng = drone_image_base_lng - drone_image_increment * 1.422  / 2;
+    const img2_ne_lat = drone_image_base_lat - drone_image_increment + drone_image_increment * 1.097 / 2;
+    const img2_ne_lng = drone_image_base_lng + drone_image_increment * 1.422 / 2;
     return (
         <div>
             <Search panTo={panTo}/>
@@ -55,8 +71,8 @@ export default function App() {
                 <GroundOverlay
                     url={img1}
                     bounds={new window.google.maps.LatLngBounds(
-                        new window.google.maps.LatLng(38.984398443116966, -76.94956330265015),
-                        new window.google.maps.LatLng(38.98505681995151, -76.94870550950368)
+                        new window.google.maps.LatLng(img1_sw_lat, img1_sw_lng),
+                        new window.google.maps.LatLng(img1_ne_lat, img1_ne_lng)
                     )}
                     onClick={onMapClick}
                 />
@@ -65,8 +81,8 @@ export default function App() {
                     // url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
                     url={img2}
                     bounds={new window.google.maps.LatLngBounds(
-                        new window.google.maps.LatLng(38.98375532067455, -76.94956703026241),
-                        new window.google.maps.LatLng(38.984468864794344, -76.94870415014813)
+                        new window.google.maps.LatLng(img2_sw_lat, img2_sw_lng),
+                        new window.google.maps.LatLng(img2_ne_lat, img2_ne_lng)
                     )}
                     onClick={onMapClick}
                 />
